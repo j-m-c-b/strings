@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>String Editing</title>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            font-family: monospace;
+        }
+
+        textarea {
+            background-color: grey;
+        }
+
+        button {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <h3>String Editing</h3>
+    <div>
+        In :
+        <textarea name="" id="domTxtIn" cols="30" rows="10"></textarea>
+    </div>
+
+    <div>
+        Out:
+        <textarea name="" id="domTxtOut" cols="30" rows="10"></textarea>
+    </div>
+
+    <br>
+    <br>
+    <script>
+
+        let domTxtIn = document.getElementById("domTxtIn")
+        let domTxtOut = document.getElementById("domTxtOut")
+        domTxtIn.value = "";
+        domTxtOut.value = "";
+        let array = [
+            {
+                name: "(New Line) String To Array",
+                func: function (str) {
+                    return JSON.stringify(str.split("\n"))
+                }
+            },
+            {
+                name: "(Row) Capitalize The First Letter Of Each Word",
+                func: function (str) {
+                    return str.split(" ")
+                        .map(value => value[0].toUpperCase()
+                            + value.substr(1)).join(" ");
+                }
+            },
+            {
+                name: "ALL TO UPPERCASE",
+                func: function (str) {
+                    return str.toUpperCase();
+                }
+            },
+            {
+                name: "all to lowercase",
+                func: function (str) {
+                    return str.toLowerCase();
+                }
+            },
+            {
+                name: "(NewLine) Array to String",
+                func: function (str) {
+                    console.log(JSON.parse(str));
+                    return JSON.parse(str).join("\n")
+                }
+            },
+            {
+                name: "(New Line) Capitalize The First Letter Of Each Word",
+                func: function (str) {
+                    return str.split("\n")
+                        .map(value => value[0].toUpperCase()
+                            + value.substr(1)).join("\n");
+                }
+            },
+        ]
+
+        for (let part of array) {
+            let button = document.createElement("button");
+
+
+            button.innerHTML = part.name;
+            button.addEventListener("click", function () {
+                domTxtOut.value
+                    = part.func(domTxtIn.value)
+            });
+            document.body.appendChild(button);
+            document.body.appendChild(document.createElement("br"));
+        }
+    </script>
+</body>
+
+</html>
