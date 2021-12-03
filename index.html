@@ -85,6 +85,12 @@
                             + value.substr(1)).join("\n");
                 }
             },
+            {
+                name: "DeleteSpaces",
+                func: function (str) {
+                    return str.replaceAll(" ", "");
+                }
+            },
         ]
 
         for (let part of array) {
