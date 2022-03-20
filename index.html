@@ -13,12 +13,25 @@
             font-family: monospace;
         }
 
-        textarea {
+        textarea,
+        input {
             background-color: grey;
         }
 
         button {
             margin-bottom: 10px;
+        }
+
+
+        #t,
+        #txtToRepeat {
+            width: 100%;
+        }
+
+        #inB,
+        #inE,
+        #inS {
+            width: 60px;
         }
     </style>
 </head>
@@ -85,12 +98,6 @@
                             + value.substr(1)).join("\n");
                 }
             },
-            {
-                name: "DeleteSpaces",
-                func: function (str) {
-                    return str.replaceAll(" ", "");
-                }
-            },
         ]
 
         for (let part of array) {
@@ -106,6 +113,43 @@
             document.body.appendChild(document.createElement("br"));
         }
     </script>
+    <hr>
+    <div>
+        Text To Repeat {i}
+    </div>
+    <input id="txtToRepeat" type="text">
+    <br><br>
+    <div>
+        From: <input id="inB" type="text"> to <input id="inE" type="text">
+        Step <input id="inS" value="1" type="text" name="" >
+    </div>
+    <div>
+        <button onclick="loop()">Loop</button>
+    </div>
+    <div>
+        Result
+
+    </div>
+
+    <textarea name="" id="t" cols="30" rows="10"></textarea>
+
+
 </body>
+
+
+<script>
+    function loop() {
+        let text = document.getElementById("txtToRepeat").value;
+        let b = parseInt(document.getElementById("inB").value);
+        let e = parseInt(document.getElementById("inE").value);
+        let step = parseInt(document.getElementById("inS").value);
+        let result = "";
+        for (let i = b; i <= e; i += step) {
+            result += text.replace("{i}", i) + "\n";
+
+        }
+        document.getElementById("t").value = result;
+    }
+</script>
 
 </html>
